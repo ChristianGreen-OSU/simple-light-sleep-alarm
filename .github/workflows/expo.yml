@@ -1,4 +1,4 @@
-name: Expo Update to Preview
+name: Expo Preview Update
 
 on:
   push:
@@ -6,32 +6,26 @@ on:
       - main
 
 jobs:
-  deploy:
+  update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: 🧰 Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 18.x
+          cache: npm
 
-      - name: 🧹 Clean install
-        run: rm -rf node_modules package-lock.json
+      - name: 🧩 Setup Expo & EAS CLI
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: 📦 Install base dependencies
-        run: npm install
+      - name: 📦 Install dependencies
+        run: npm ci
 
-      - name: 🧩 Ensure SDK-compatible packages
-        run: npx expo install
-
-      - name: 📡 Install EAS CLI
-        run: npm install -g eas-cli
-
-      - name: 🚀 Publish update to Expo Go
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-          CI: 1
-        run: eas update --branch preview --message "GitHub Action update"
+      - name: 🚀 Publish update to preview branch
+        run: eas update --branch preview --non-interactive
