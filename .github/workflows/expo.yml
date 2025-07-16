@@ -1,4 +1,4 @@
-name: Expo Preview Deploy
+name: Expo Update to Preview
 
 on:
   push:
@@ -10,23 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: 🧰 Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: npm install
 
-      - name: Install EAS CLI
+      - name: 🚀 Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Log in to Expo
-        run: eas login -u ${{ secrets.EXPO_USERNAME }} -p ${{ secrets.EXPO_PASSWORD }}
-
-      - name: Publish update to Expo Go
+      - name: 📡 Publish update to Expo Go
         env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
           CI: 1
         run: eas update --branch preview --message "GitHub Action update"
