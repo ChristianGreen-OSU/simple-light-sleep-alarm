@@ -1,5 +1,5 @@
 modules = ["docker", "nodejs-23"]
-run = "npm install"
+run = "yarn install"
 [nix]
 channel = "stable-24_05"
 
