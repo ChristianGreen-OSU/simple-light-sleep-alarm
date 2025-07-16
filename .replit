@@ -1,0 +1,7 @@
+modules = ["docker", "nodejs-23"]
+run = "echo ‘React Native can’t be run on Replit, you dummy’"
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "echo ‘React Native can’t be run on Replit, you dummy’"]

@@ -1,0 +1,28 @@
+name: Deploy to Expo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    name: Publish to Expo
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Expo login
+        run: npx expo login -u ${{ secrets.EXPO_USERNAME }} -p ${{ secrets.EXPO_PASSWORD }}
+
+      - name: Publish to Expo
+        run: npx expo publish --non-interactive
