@@ -21,16 +21,16 @@ jobs:
       - name: 🧹 Remove lock file and node_modules
         run: rm -rf node_modules package-lock.json
 
-      - name: 📦 Install dependencies
-        run: npm install
+      - name: 🚀 Install Expo CLI
+        run: npm install -g expo-cli
 
-      - name: 🧩 Ensure SDK-compatible packages
-        run: npx expo install
+      - name: 📦 Install SDK-compatible dependencies
+        run: expo install
 
-      - name: 🚀 Install EAS CLI
+      - name: 📡 Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: 📡 Publish update to Expo Go
+      - name: 🚀 Publish update to Expo Go
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
           CI: 1
