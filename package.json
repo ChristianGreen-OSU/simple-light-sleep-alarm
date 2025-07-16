@@ -10,6 +10,7 @@
     "react": "18.2.0",
     "react-native": "0.73.0",
     "react-native-push-notification": "^8.1.1",
-    "expo-updates": "^0.25.0"
+    "expo-updates": "^0.25.0",
+    "metro": "0.81.0",
   }
 }
