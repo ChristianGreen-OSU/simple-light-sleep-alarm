@@ -6,9 +6,13 @@
     "start": "echo 'React Native app - push to GitHub and test with Expo.'"
   },
   "dependencies": {
-    "expo": "53.0.0",
-    "react": "18.2.0",
-    "react-native": "0.73.0",
-    "react-native-push-notification": "^8.1.1"
+    "expo": "53.0.19",
+    "react": "19.0.0",
+    "react-native": "0.79.5",
+    "expo-updates": "~0.28.17"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3",
+    "@types/react": "~19.0.10"
   }
 }

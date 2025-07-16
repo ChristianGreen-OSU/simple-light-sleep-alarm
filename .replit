@@ -1,7 +1,98 @@
 modules = ["docker", "nodejs-23"]
-run = "yarn install"
+run = "npm i --package-lock-only"
 [nix]
 channel = "stable-24_05"
 
 [deployment]
 run = ["sh", "-c", "echo ‘React Native can’t be run on Replit, you dummy’"]
+
+[[ports]]
+localPort = 8081
+externalPort = 80
+
+[workflows]
+
+[[workflows.workflow]]
+name = "Clean node modules and package-lock, then install"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf node_modules package-lock.json && npm install"
+
+[[workflows.workflow]]
+name = "Audit fix"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm audit fix --force"
+
+[[workflows.workflow]]
+name = "Expo doctor"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx expo-doctor"
+
+[[workflows.workflow]]
+name = "Npx expo install —check"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx expo install --check"
+
+[[workflows.workflow]]
+name = "eas update "
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "eas update --branch preview --message \"Local test\" --non-interactive"
+
+[[workflows.workflow]]
+name = "Eas login"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export EXPO_TOKEN=EXPO_TOKEN"
+
+[[workflows.workflow]]
+name = "eas build"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "eas build --profile development --platform ios"
+
+[[workflows.workflow]]
+name = "Create expo project"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx create-expo-app@latest"
+
+[[workflows.workflow]]
+name = "Run ios"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd light-sleep-alarm"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx expo start"
