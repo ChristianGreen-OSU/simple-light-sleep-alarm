@@ -20,6 +20,8 @@ jobs:
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-          
+      - name: 🏗️ Install Expo
+        run: npx install-expo-modules@latest
+        
       - name: 🚀 Create update
         run: eas update --auto --non-interactive
