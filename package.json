@@ -6,7 +6,7 @@
     "start": "echo 'React Native app - push to GitHub and test with Expo.'"
   },
   "dependencies": {
-    "expo": "^50.0.0",
+    "expo": "^53.0.0",
     "react": "18.2.0",
     "react-native": "0.73.0",
     "react-native-push-notification": "^8.1.1"
