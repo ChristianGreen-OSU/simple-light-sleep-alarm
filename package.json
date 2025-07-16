@@ -5,13 +5,11 @@
   "scripts": {
     "start": "echo 'React Native app - push to GitHub and test with Expo.'"
   },
-  {
-    "dependencies": {
-      "expo": "^53.0.0",
-      "react": "18.2.0",
-      "react-native": "0.73.0",
-      "react-native-push-notification": "^8.1.1",
-      "expo-updates": "^0.25.0"
-    }
+  "dependencies": {
+    "expo": "^53.0.0",
+    "react": "18.2.0",
+    "react-native": "0.73.0",
+    "react-native-push-notification": "^8.1.1",
+    "expo-updates": "^0.25.0"
   }
 }
