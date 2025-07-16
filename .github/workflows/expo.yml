@@ -27,4 +27,4 @@ jobs:
         run: npm install
 
       - name: 🚀 Publish update to preview branch
-        run: eas update --branch preview --message github-action-update --non-interactive
+        run: eas update --branch preview --message "GitHub Action update" --non-interactive
