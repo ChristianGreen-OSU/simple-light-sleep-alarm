@@ -18,14 +18,14 @@ jobs:
         with:
           node-version: 18
 
-      - name: 🧹 Remove lock file and node_modules
+      - name: 🧹 Clean install
         run: rm -rf node_modules package-lock.json
 
-      - name: 🚀 Install Expo CLI
-        run: npm install -g expo-cli
+      - name: 📦 Install base dependencies
+        run: npm install
 
-      - name: 📦 Install SDK-compatible dependencies
-        run: expo install
+      - name: 🧩 Ensure SDK-compatible packages
+        run: npx expo install
 
       - name: 📡 Install EAS CLI
         run: npm install -g eas-cli
