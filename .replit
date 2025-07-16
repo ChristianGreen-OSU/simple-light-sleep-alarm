@@ -1,5 +1,5 @@
 modules = ["docker", "nodejs-23"]
-run = "echo ‘React Native can’t be run on Replit, you dummy’"
+run = "npm install"
 [nix]
 channel = "stable-24_05"
 
