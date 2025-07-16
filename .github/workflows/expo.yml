@@ -1,34 +1,28 @@
-name: Expo Preview Update
-
 on:
   push:
     branches:
       - main
-
 jobs:
   update:
     runs-on: ubuntu-latest
-
     steps:
-      - name: 📥 Checkout repository
+      - name: 🏗 Setup repo
         uses: actions/checkout@v3
 
-      - name: 🧰 Set up Node.js
+      - name: 🏗 Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
+          cache: yarn
 
-      - name: 🧩 Set up Expo & EAS CLI
+      - name: 🏗 Setup EAS
         uses: expo/expo-github-action@v8
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: 🧹 Clean install environment
-        run: rm -rf node_modules package-lock.json
-
       - name: 📦 Install dependencies
-        run: npm install
+        run: yarn install
 
-      - name: 🚀 Publish update to preview branch
-        run: eas update --branch preview --message "GitHub Action update" --non-interactive
+      - name: 🚀 Create update
+        run: eas update --auto --non-interactive
