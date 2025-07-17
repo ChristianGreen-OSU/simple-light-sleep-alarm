@@ -67,15 +67,6 @@ task = "shell.exec"
 args = "export EXPO_TOKEN=EXPO_TOKEN"
 
 [[workflows.workflow]]
-name = "eas build"
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "eas build --profile development --platform ios"
-
-[[workflows.workflow]]
 name = "Create expo project"
 mode = "sequential"
 author = 8309852
@@ -96,3 +87,52 @@ args = "cd light-sleep-alarm"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npx expo start"
+
+[[workflows.workflow]]
+name = "eas build all"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = ""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "eas build -p all"
+
+[[workflows.workflow]]
+name = "cd light-sleep-alarm"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd light-sleep-alarm"
+
+[[workflows.workflow]]
+name = "Whoami"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "eas whoami"
+
+[[workflows.workflow]]
+name = "eas build:configure"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "eas build:configure"
+
+[[workflows.workflow]]
+name = "Install expo dev client"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx expo install expo-dev-client"
