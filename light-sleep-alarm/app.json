@@ -1,42 +1,35 @@
 {
   "expo": {
-    "name": "light-sleep-alarm",
-    "slug": "light-sleep-alarm",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "lightsleepalarm",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true
+    "name": "Light Sleep Alarm App",
+    "slug": "light-sleep-alarm-app",
+    "owner": "greenchristianb",
+    "jsEngine": "jsc",
+    "sdkVersion": "53.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "entryPoint": "./App.js",
+    "extra": {
+      "eas": {
+        "projectId": "e3cc15fd-ab88-4948-a0a3-e9250c511d28"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e3cc15fd-ab88-4948-a0a3-e9250c511d28"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true
+      "jsEngine": "jsc"
     },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
-    },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
-        }
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true
+    "ios": {
+      "jsEngine": "jsc",
+      "bundleIdentifier": "com.greenchristianb.lightsleepalarmapp",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     }
   }
 }

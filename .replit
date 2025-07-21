@@ -1,5 +1,5 @@
-modules = ["docker", "nodejs-23"]
-run = "npm i --package-lock-only"
+modules = ["docker", "nodejs-18"]
+run = "cd light-sleep-alarm && npx expo start --tunnel --go"
 [nix]
 channel = "stable-24_05"
 
@@ -136,3 +136,30 @@ author = 8309852
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npx expo install expo-dev-client"
+
+[[workflows.workflow]]
+name = "Node version"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node -v"
+
+[[workflows.workflow]]
+name = "Node version update to 18"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash && export NVM_DIR="/config/nvm"   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  && nvm install 18 && nvm use 18'
+
+[[workflows.workflow]]
+name = "Nvm install 18"
+mode = "sequential"
+author = 8309852
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "nvm install 18"
