@@ -1,70 +1,19 @@
 modules = ["docker", "nodejs-18"]
-run = "cd light-sleep-alarm && npx expo start --tunnel --go"
+run = "cd light-sleep-alarm && npx expo start --tunnel"
 [nix]
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "echo ‘React Native can’t be run on Replit, you dummy’"]
 
 [[ports]]
 localPort = 8081
 externalPort = 80
 
+[[ports]]
+localPort = 8082
+externalPort = 3000
+
 [workflows]
-
-[[workflows.workflow]]
-name = "Clean node modules and package-lock, then install"
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "rm -rf node_modules package-lock.json && npm install"
-
-[[workflows.workflow]]
-name = "Audit fix"
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm audit fix --force"
-
-[[workflows.workflow]]
-name = "Expo doctor"
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npx expo-doctor"
-
-[[workflows.workflow]]
-name = "Npx expo install —check"
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npx expo install --check"
-
-[[workflows.workflow]]
-name = "eas update "
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "eas update --branch preview --message \"Local test\" --non-interactive"
-
-[[workflows.workflow]]
-name = "Eas login"
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "export EXPO_TOKEN=EXPO_TOKEN"
 
 [[workflows.workflow]]
 name = "Create expo project"
@@ -76,7 +25,7 @@ task = "shell.exec"
 args = "npx create-expo-app@latest"
 
 [[workflows.workflow]]
-name = "Run ios"
+name = "dev build iOS "
 mode = "sequential"
 author = 8309852
 
@@ -86,20 +35,7 @@ args = "cd light-sleep-alarm"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npx expo start"
-
-[[workflows.workflow]]
-name = "eas build all"
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = ""
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "eas build -p all"
+args = "npx eas build -p ios --profile development"
 
 [[workflows.workflow]]
 name = "cd light-sleep-alarm"
@@ -111,55 +47,14 @@ task = "shell.exec"
 args = "cd light-sleep-alarm"
 
 [[workflows.workflow]]
-name = "Whoami"
+name = "Start expo"
 mode = "sequential"
 author = 8309852
 
 [[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "eas whoami"
-
-[[workflows.workflow]]
-name = "eas build:configure"
-mode = "sequential"
-author = 8309852
+task = "workflow.run"
+args = "cd light-sleep-alarm"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "eas build:configure"
-
-[[workflows.workflow]]
-name = "Install expo dev client"
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npx expo install expo-dev-client"
-
-[[workflows.workflow]]
-name = "Node version"
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "node -v"
-
-[[workflows.workflow]]
-name = "Node version update to 18"
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash && export NVM_DIR="/config/nvm"   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  && nvm install 18 && nvm use 18'
-
-[[workflows.workflow]]
-name = "Nvm install 18"
-mode = "sequential"
-author = 8309852
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "nvm install 18"
+args = "npx expo start --tunnel"

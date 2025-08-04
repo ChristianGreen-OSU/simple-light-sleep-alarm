@@ -1,30 +1,27 @@
 import * as Notifications from 'expo-notifications';
 import { SchedulableTriggerInputTypes } from 'expo-notifications';
 
-export async function scheduleAlarm(alarmTime: Date) {
-  const intervals = [15, 10, 5]; // minutes before alarm
-
-  for (let i = 0; i < intervals.length; i++) {
-    const minutesBefore = intervals[i];
-    const buzzTime = new Date(alarmTime.getTime() - minutesBefore * 1000); //seconds now. 60k for minutes
+export async function scheduleAlarm(alarmTime: Date, buzzMinutesBefore: number[]) {
+  for (let i = 0; i < buzzMinutesBefore.length; i++) {
+    const minutesBefore = buzzMinutesBefore[i];
+    const buzzTime = new Date(alarmTime.getTime() - minutesBefore * 60 * 1000);
 
     await Notifications.scheduleNotificationAsync({
       content: {
         title: 'Wake Up Buzz',
         body: 'Buzz '.repeat(i + 1).trim(),
-        sound: undefined,
+        sound: true,
       },
-      trigger: {date: buzzTime, type: SchedulableTriggerInputTypes.DATE	},
+      trigger: { date: buzzTime, type: SchedulableTriggerInputTypes.DATE },
     });
   }
 
-  // Main alarm with default sound
   await Notifications.scheduleNotificationAsync({
     content: {
       title: 'ALARM!',
       body: 'Time to wake up!',
       sound: true,
     },
-    trigger: {date: alarmTime, type: SchedulableTriggerInputTypes.DATE	},
+    trigger: { date: alarmTime, type: SchedulableTriggerInputTypes.DATE },
   });
 }
